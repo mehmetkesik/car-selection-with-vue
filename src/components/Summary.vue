@@ -6,7 +6,7 @@
     <div class="col-md-6">
       <div class="car-box text-center" style="margin-right: 0">
         <p class="car-name">{{ car.name }}</p>
-        <img :src="require('../assets/cars/'+car.model+'/'+car.colors[0]+'.png')" alt="car image"
+        <img :src="require('../assets/cars/'+car.model+'/'+car.colors[car.selectedColor]+'.png')" alt="car image"
              style="width: 500px;height: 250px;margin-top: 75px;"/>
       </div>
     </div>
