@@ -46,12 +46,11 @@
       <component :is="selectedComponent" :cars="cars" :selectedModel="selectedModel"></component>
       <!--</Transition>-->
 
-      <br/><br/>
-
-      <div class="row m-0" style="margin-bottom: 50px !important;">
+      <div class="row m-0">
         <div class="col-md-3"></div>
         <div class="col-md-6 p-3">
-          <div class="downslide">
+          <div class="downslide"
+               :style="{'marginTop':selectedComponent !== 'Colors'?'80px':'0'}">
             <img alt="selected car image" :src="require('../assets/cars/'+
         getSelectedCar.model+'/'+
         getSelectedCar.colors[getSelectedCar.selectedColor]+'.png')"
@@ -61,8 +60,13 @@
               <p class="downslide-text downslide-text-bold">Total</p>
               <p class="downslide-text">{{ getTotalPrice.toLocaleString('tr-TR') }} TL</p>
             </div>
-            <button class="downslide-button"><span class="downslide-button-text">{{ getSlideText }}</span> <i
-                class="bi bi-arrow-right" style="font-size: 15px;"></i></button>
+            <button class="downslide-button" @click="slideTick()"><span class="downslide-button-text">{{
+                getSlideText
+              }}</span>
+              <i class="bi bi-arrow-right" style="font-size: 15px;padding-bottom: 2px;"
+                 v-if="selectedComponent !== 'Summary'"></i>
+              <i class="bi bi-cart4" style="font-size: 15px;padding-bottom: 5px;" v-else></i>
+            </button>
           </div>
         </div>
       </div>
@@ -181,6 +185,21 @@ export default {
       ],
     }
   },
+  methods: {
+    slideTick() {
+      switch (this.selectedComponent) {
+        case 'Models':
+          this.selectedComponent = 'Colors'
+          break
+        case 'Colors':
+          this.selectedComponent = 'Accessories'
+          break
+        case 'Accessories':
+          this.selectedComponent = 'Summary'
+          break
+      }
+    }
+  },
   computed: {
     getSelectedCar() {
       return this.cars.find(c => c.id === this.selectedModel)
@@ -258,7 +277,7 @@ export default {
   background: #FFFFFF;
   box-shadow: 0 2px 70px rgba(0, 0, 0, 0.0703671);
   border-radius: 11px;
-  margin: 0 auto;
+  margin: 0 auto 50px auto;
   text-align: left;
 }
 
