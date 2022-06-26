@@ -1,5 +1,5 @@
 <template>
-  <div class="row">
+  <div class="row m-0">
     <div class="col text-center">
 
       <img src="../assets/seat-logo.png" alt="logo" style="width: 141px;margin-top: 20px;margin-bottom: 50px;"/>
@@ -48,19 +48,24 @@
 
       <br/><br/>
 
-      <div class="downslide">
-        <img alt="selected car image" :src="require('../assets/cars/'+
+      <div class="row m-0" style="margin-bottom: 50px !important;">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 p-3">
+          <div class="downslide">
+            <img alt="selected car image" :src="require('../assets/cars/'+
         getSelectedCar.model+'/'+
         getSelectedCar.colors[getSelectedCar.selectedColor]+'.png')"
-             style="height: 100%;"/>
-        <div class="vertical-line"></div>
-        <div class="d-flex flex-column" style="width: 200px;">
-          <p class="downslide-text downslide-text-bold" style="display: inline-block">fads</p>
-          <p class="downslide-text" style="display: inline-block">fads</p>
+                 style="height: 100%;"/>
+            <div class="vertical-line"></div>
+            <div class="d-flex flex-column" style="width: 200px;padding: 10px;">
+              <p class="downslide-text downslide-text-bold">Total</p>
+              <p class="downslide-text">{{ getTotalPrice.toLocaleString('tr-TR') }} TL</p>
+            </div>
+            <button class="downslide-button"><span class="downslide-button-text">{{ getSlideText }}</span> <i
+                class="bi bi-arrow-right" style="font-size: 15px;"></i></button>
+          </div>
         </div>
-        <button class="downslide-button">Colors</button>
       </div>
-      <br/><br/><br/><br/><br/>
 
     </div>
   </div>
@@ -92,7 +97,7 @@ export default {
           model: "ibiza",
           modelDescription: "Ibiza 1.3 Ecotech DSG",
           name: "IBIZA",
-          price: 193.500,
+          price: 193500,
           description: "<b>193.500 TL</b>'den başlayan fiyatlarla",
           colors: ["red", "black", "blue", "gray", "white"],
           accessorries: [
@@ -135,7 +140,7 @@ export default {
           model: "arona",
           modelDescription: "Arona 1.3 Ecotech DSG",
           name: "ARONA",
-          price: 170.000,
+          price: 170000,
           description: "<b>170.000 TL</b>'den başlayan fiyatlarla",
           colors: ["red", "black", "blue", "gray", "white"],
           accessorries: [
@@ -179,6 +184,24 @@ export default {
   computed: {
     getSelectedCar() {
       return this.cars.find(c => c.id === this.selectedModel)
+    },
+    getTotalPrice() {
+      let car = this.getSelectedCar
+      return car.price + car.selectedAccessories
+          .map(accId => car.accessorries.find(acc => acc.id === accId).price)
+          .reduce((f, l) => f + l)
+    },
+    getSlideText() {
+      switch (this.selectedComponent) {
+        case 'Models':
+          return 'COLORS'
+        case 'Colors':
+          return 'ACCESSORIES'
+        case 'Accessories':
+          return 'SUMMARY'
+        default:
+          return 'BUY NOW'
+      }
     }
   }
 }
@@ -228,8 +251,10 @@ export default {
 .downslide {
   display: flex;
   flex-direction: row;
-  width: 470px;
-  height: 50px;
+  width: 100%;
+  max-width: 940px;
+  min-width: 500px;
+  height: 75px;
   background: #FFFFFF;
   box-shadow: 0 2px 70px rgba(0, 0, 0, 0.0703671);
   border-radius: 11px;
@@ -238,18 +263,26 @@ export default {
 }
 
 .downslide-button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
   background: #181818;
   border-radius: 0 11px 11px 0;
   height: 100%;
-  width: 120px;
+  width: 28%;
   color: white;
   margin-left: auto;
   border: none;
 }
 
+.downslide-button:hover {
+  background: #363535;
+}
+
 .vertical-line {
   width: 1px;
-  height: 30px;
+  height: 55px;
   margin-top: 10px;
   border-right: 1px solid rgba(151, 151, 151, 0.2);
 }
@@ -260,10 +293,21 @@ export default {
   line-height: 15px;
   letter-spacing: 1.7094px;
   color: #1C1C1C;
+  margin: 0;
 }
 
 .downslide-text-bold {
   font-weight: 800;
+  margin-bottom: 15px;
+}
+
+.downslide-button-text {
+  font-family: 'Qanelas', serif;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 2.78571px;
+  color: #FFFFFF;
 }
 
 </style>
