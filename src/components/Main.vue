@@ -42,10 +42,12 @@
 
       </div>
 
-      <!--      <Transition :duration="{ enter: 500, leave: 800 }" mode="in-out" appear>-->
-      <component :is="selectedComponent" :cars="cars" :selectedModel="selectedModel"
-                 @keepSelection="keepSelection"></component>
-      <!--      </Transition>-->
+      <div>
+        <Transition name="slide" mode="out-in" appear>
+          <component :is="selectedComponent" :cars="cars" :selectedModel="selectedModel"
+                     @keepSelection="keepSelection"></component>
+        </Transition>
+      </div>
 
       <div class="row m-0">
         <div class="col-md-3"></div>
@@ -195,7 +197,7 @@ export default {
         case 'Color':
           this.cars.find(car => car.id === this.selectedModel).selectedColor = value
           break;
-        case 'Accessories':
+        case 'Accessorries':
           var car = this.cars.find(car => car.id === this.selectedModel)
           var accIndex = car.selectedAccessories.find(id => id === value)
           if (accIndex) {
@@ -205,7 +207,6 @@ export default {
           }
           break;
       }
-      console.log(value)
     },
     slideTick() {
       switch (this.selectedComponent) {
@@ -348,6 +349,32 @@ export default {
   font-size: 12px;
   letter-spacing: 2.78571px;
   color: #FFFFFF;
+}
+
+/*--------------TRANSITION SLIDE-----------------*/
+
+.slide-enter {
+
+}
+
+.slide-enter-active {
+  animation: slide-in 0.5s ease-out forwards;
+}
+
+.slide-leave {
+}
+
+.slide-leave-active {
+
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(20px);
+  }
+  to {
+    transform: translateX(0px);
+  }
 }
 
 </style>

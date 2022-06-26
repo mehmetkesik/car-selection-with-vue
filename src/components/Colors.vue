@@ -1,32 +1,33 @@
 <template>
-  <br/>
-  <br/>
-  <br/>
-  <div class="row text-center">
-    <div class="col text-center">
-      <div class="car-color">
-        <p class="car-color-text">Hayalindeki araca dair rengini seç, tarzını hemen yansıt</p>
-        <p class="car-name">{{ car.name }}</p>
-        <img class="car-image" :src="require('../assets/cars/'+car.model+'/'+car.colors[car.selectedColor]+'.png')"
-             alt="car image"/>
+  <div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row text-center">
+      <div class="col text-center">
+        <div class="car-color">
+          <p class="car-color-text">Hayalindeki araca dair rengini seç, tarzını hemen yansıt</p>
+          <p class="car-name">{{ car.name }}</p>
+          <img class="car-image" :src="require('../assets/cars/'+car.model+'/'+car.colors[car.selectedColor]+'.png')"
+               alt="car image"/>
+        </div>
+
       </div>
-
     </div>
-  </div>
-  <div class="row text-center">
-    <div class="col text-center">
-      <button class="colors-select m-2" @click="setSelectedColor(index)" v-for="(color, index) in car.colors"
-              :key="color"
-              :style="{backgroundImage: 'url('+require('../assets/cars/'+car.model+'/colors/'+color+'.jpg')+')'}"
-              :class="{'colors-select-selected':this.$parent.$data.cars.find(car => car.id === this.selectedModel).selectedColor === index}">
-        <i class="bi bi-check-lg colors-select-tick"
-           :style="{visibility:this.$parent.$data.cars.find(car => car.id === this.selectedModel).selectedColor === index ?
+    <div class="row text-center">
+      <div class="col text-center">
+        <button class="colors-select m-2" @click="setSelectedColor(index)" v-for="(color, index) in car.colors"
+                :key="color"
+                :style="{backgroundImage: 'url('+require('../assets/cars/'+car.model+'/colors/'+color+'.jpg')+')'}"
+                :class="{'colors-select-selected':car.selectedColor === index}">
+          <i class="bi bi-check-lg colors-select-tick"
+             :style="{visibility:/*this.$parent.$data.cars.find(car => car.id === this.selectedModel)*/car.selectedColor === index ?
         'visible':'hidden'}"></i>
-      </button>
+        </button>
+      </div>
     </div>
+
   </div>
-
-
 </template>
 
 <script>

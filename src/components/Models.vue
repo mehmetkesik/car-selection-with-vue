@@ -1,35 +1,36 @@
 <template>
-  <br/>
-  <br/>
-  <br/>
-  <div class="row text-center">
-    <div class="col-2"></div>
+  <div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row text-center">
+      <div class="col-2"></div>
 
-    <div class="col text-center" v-for="car in cars" :key="car.id">
-      <div class="car-box text-center" @click="setViewedCar(car.id)"
-           :style="{opacity:showedModel === car.id ? 1 : 0.3}">
+      <div class="col text-center" v-for="car in cars" :key="car.id">
+        <div class="car-box text-center" @click="setViewedCar(car.id)"
+             :style="{opacity:showedModel === car.id ? 1 : 0.3}">
 
-        <p class="car-name">{{ car.name }}</p>
-        <img :src="require('../assets/cars/'+car.model+'/'+car.colors[0]+'.png')" alt="car image"
-             style="width: 500px;height: 250px;margin-top: 75px;"/>
-        <div class="select-tick text-center" :style="{display: selectedModel === car.id ? 'flex':'none'}">
-          <i class="bi bi-check-lg" style="color:lightgray;width: 100%;padding-top: 1px;font-size: 20px;"></i>
+          <p class="car-name">{{ car.name }}</p>
+          <img :src="require('../assets/cars/'+car.model+'/'+car.colors[0]+'.png')" alt="car image"
+               style="width: 500px;height: 250px;margin-top: 75px;"/>
+          <div class="select-tick text-center" :style="{display: selectedModel === car.id ? 'flex':'none'}">
+            <i class="bi bi-check-lg" style="color:lightgray;width: 100%;padding-top: 1px;font-size: 20px;"></i>
+          </div>
+          <div class="car-description">
+            <p class="car-desc-text" v-html="car.description"
+               :style="{display: showedModel === car.id ? 'inline':'none'}"></p>
+            <button class="car-desc-button" @click="setSelectedModel(car.id)"
+                    :style="{display: showedModel === car.id ? 'inline':'none'}">
+              {{ selectedModel === car.id ? "Selected" : "Select" }}
+            </button>
+          </div>
+
         </div>
-        <div class="car-description">
-          <p class="car-desc-text" v-html="car.description"
-             :style="{display: showedModel === car.id ? 'inline':'none'}"></p>
-          <button class="car-desc-button" @click="setSelectedModel(car.id)"
-                  :style="{display: showedModel === car.id ? 'inline':'none'}">
-            {{ selectedModel === car.id ? "Selected" : "Select" }}
-          </button>
-        </div>
-
       </div>
+
+      <div class="col-2"></div>
     </div>
-
-    <div class="col-2"></div>
   </div>
-
 </template>
 
 <script>

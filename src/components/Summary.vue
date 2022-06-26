@@ -1,35 +1,38 @@
 <template>
-  <br/>
-  <br/>
-  <br/>
-  <div class="row p-5">
-    <div class="col-md-6">
-      <div class="car-box text-center" style="margin-right: 0">
-        <p class="car-name">{{ car.name }}</p>
-        <img :src="require('../assets/cars/'+car.model+'/'+car.colors[car.selectedColor]+'.png')" alt="car image"
-             style="width: 500px;height: 250px;margin-top: 75px;"/>
+  <div>
+    <br/>
+    <br/>
+    <br/>
+    <div class="row p-5">
+      <div class="col-md-6">
+        <div class="car-box text-center" style="margin-right: 0">
+          <p class="car-name">{{ car.name }}</p>
+          <img :src="require('../assets/cars/'+car.model+'/'+car.colors[car.selectedColor]+'.png')" alt="car image"
+               style="width: 500px;height: 250px;margin-top: 75px;"/>
+        </div>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="summary-description">
-        <h3 class="summary-head">Model</h3>
-        <p class="summary-text">{{ car.modelDescription }}</p>
-        <hr class="opacity-25"/>
-        <h3 class="summary-head">Color</h3>
-        <p class="summary-text">
-          {{ prettyColor(car.colors[$parent.$data.cars.find(car => car.id === this.selectedModel).selectedColor]) }}</p>
-        <hr class="opacity-25"/>
-        <h3 class="summary-head">Accessories</h3>
-        <p class="summary-text">
+      <div class="col-md-6">
+        <div class="summary-description">
+          <h3 class="summary-head">Model</h3>
+          <p class="summary-text">{{ car.modelDescription }}</p>
+          <hr class="opacity-25"/>
+          <h3 class="summary-head">Color</h3>
+          <p class="summary-text">
+            {{
+              prettyColor(car.colors[car.selectedColor])
+            }}</p>
+          <hr class="opacity-25"/>
+          <h3 class="summary-head">Accessories</h3>
+          <p class="summary-text">
           <span v-for="(acc, index) in car.selectedAccessories.map(x => car.accessorries.find(a => a.id === x))"
                 :key="acc.id">{{ prettyAcc(acc.description) }} <span
               v-if="index !== car.selectedAccessories.length-1"> + </span> </span>
-        </p>
-      </div>
+          </p>
+        </div>
 
+      </div>
     </div>
   </div>
-
 </template>
 
 <script>

@@ -1,26 +1,27 @@
 <template>
-  <br/>
-  <br/>
-  <br/>
-  <p class="car-acc-text">Seçtiğin araca ait özellikler, konforun ve yaşam stilini belirler.</p>
-  <div class="row text-center" style="max-width: 950px;margin: 0 auto">
-    <div class="col-md-4 text-center" v-for="acc in car.accessorries" :key="acc.id">
-      <div class="accessories" :class="{'accessories-select':isSelectedAcc(acc)}">
-        <p :class="{'accessories-select-text':isSelectedAcc(acc),
+  <div>
+    <br/>
+    <br/>
+    <br/>
+    <p class="car-acc-text">Seçtiğin araca ait özellikler, konforun ve yaşam stilini belirler.</p>
+    <div class="row text-center" style="max-width: 950px;margin: 0 auto">
+      <div class="col-md-4 text-center" v-for="acc in car.accessorries" :key="acc.id">
+        <div class="accessories" :class="{'accessories-select':isSelectedAcc(acc)}">
+          <p :class="{'accessories-select-text':isSelectedAcc(acc),
         'accessories-text':!isSelectedAcc(acc)}">{{ acc.description }}</p>
-        <p :class="{'accessories-select-text':isSelectedAcc(acc),
+          <p :class="{'accessories-select-text':isSelectedAcc(acc),
         'accessories-text':!isSelectedAcc(acc)}" style="margin-top: 50px">{{ acc.price.toLocaleString('tr-TR') }} TL</p>
-        <button class="acc-select-button" @click="setAccessories(acc.id)" v-if="isSelectedAcc(acc)">
-          <i class="bi bi-check-lg acc-select-tick-select"></i>
-        </button>
-        <button class="acc-select-button" @click="setAccessories(acc.id)" v-if="!isSelectedAcc(acc)"
-                style="border: 1px solid lightgray;">
-          <i class="bi bi-check-lg acc-select-tick" style="visibility: hidden"></i>
-        </button>
+          <button class="acc-select-button" @click="setAccessories(acc.id)" v-if="isSelectedAcc(acc)">
+            <i class="bi bi-check-lg acc-select-tick-select"></i>
+          </button>
+          <button class="acc-select-button" @click="setAccessories(acc.id)" v-if="!isSelectedAcc(acc)"
+                  style="border: 1px solid lightgray;">
+            <i class="bi bi-check-lg acc-select-tick" style="visibility: hidden"></i>
+          </button>
+        </div>
       </div>
     </div>
   </div>
-
 </template>
 
 <script>
@@ -39,18 +40,10 @@ export default {
   },
   methods: {
     setAccessories(i) {
-      this.$emit('keepSelection', 'Accessories', i)
-      /*let selectedModel = this.$parent.$data.cars.find(car => car.id === this.selectedModel)
-      let accIndex = selectedModel.selectedAccessories.find(id => id === i)
-      if (accIndex) {
-        selectedModel.selectedAccessories = selectedModel.selectedAccessories.filter(id => id !== i)
-      } else {
-        selectedModel.selectedAccessories.push(i)
-      }*/
+      this.$emit('keepSelection', 'Accessorries', i)
     },
     isSelectedAcc(acc) {
-      return !!this.$parent.$data.cars.find(car => car.id === this.selectedModel)
-          .selectedAccessories.find(id => id === acc.id)
+      return !!this.car.selectedAccessories.find(id => id === acc.id)
     }
   }
 }
