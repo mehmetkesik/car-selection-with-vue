@@ -371,9 +371,11 @@ export default {
 @keyframes slide-in {
   from {
     transform: translateX(20px);
+    opacity: 0.3;
   }
   to {
     transform: translateX(0px);
+    opacity: 1;
   }
 }
 
