@@ -1,24 +1,21 @@
-# Car selection with vue.js
+# Car selection with Vue.js
 
-## Project setup
-```
-npm install
-```
+Go to link for working example: [https://mk00-50e32.web.app/](https://mk00-50e32.web.app/)
 
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
+## Screenshots
 
-### Compiles and minifies for production
-```
-npm run build
-```
+### Models
 
-### Lints and fixes files
-```
-npm run lint
-```
+![models](./models.png)
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Colors
+
+![colors](./colors.png)
+
+### Accessorries
+
+![accessorries](./accessorries.png)
+
+### Summary
+
+![summary](./summary.png)
