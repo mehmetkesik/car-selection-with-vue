@@ -36,6 +36,7 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Models",
+  emits: ["keepSelection"],
   props: {
     cars: Array,
     selectedModel: Number,
@@ -47,8 +48,9 @@ export default {
   },
   methods: {
     setSelectedModel(id) {
-      this.$parent.$data.selectedModel = id
+      //this.$parent.$data.selectedModel = id
       //console.log(this.$parent.$data.selectedModel)
+      this.$emit('keepSelection', 'Model', id)
     },
     setViewedCar(id) {
       this.showedModel = id

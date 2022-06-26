@@ -36,6 +36,7 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Summary",
+  emits: ["keepSelection"],
   props: {
     cars: Array,
     selectedModel: Number

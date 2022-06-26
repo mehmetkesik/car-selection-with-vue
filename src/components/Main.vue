@@ -42,9 +42,10 @@
 
       </div>
 
-      <!--<Transition :duration="{ enter: 500, leave: 800 }" mode="in-out" appear>-->
-      <component :is="selectedComponent" :cars="cars" :selectedModel="selectedModel"></component>
-      <!--</Transition>-->
+      <!--      <Transition :duration="{ enter: 500, leave: 800 }" mode="in-out" appear>-->
+      <component :is="selectedComponent" :cars="cars" :selectedModel="selectedModel"
+                 @keepSelection="keepSelection"></component>
+      <!--      </Transition>-->
 
       <div class="row m-0">
         <div class="col-md-3"></div>
@@ -186,6 +187,26 @@ export default {
     }
   },
   methods: {
+    keepSelection(key, value) {
+      switch (key) {
+        case 'Model':
+          this.selectedModel = value
+          break;
+        case 'Color':
+          this.cars.find(car => car.id === this.selectedModel).selectedColor = value
+          break;
+        case 'Accessories':
+          var car = this.cars.find(car => car.id === this.selectedModel)
+          var accIndex = car.selectedAccessories.find(id => id === value)
+          if (accIndex) {
+            car.selectedAccessories = car.selectedAccessories.filter(id => id !== value)
+          } else {
+            car.selectedAccessories.push(value)
+          }
+          break;
+      }
+      console.log(value)
+    },
     slideTick() {
       switch (this.selectedComponent) {
         case 'Models':

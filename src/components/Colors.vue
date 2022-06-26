@@ -33,6 +33,7 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Colors",
+  emits: ["keepSelection"],
   props: {
     cars: Array,
     selectedModel: Number
@@ -44,7 +45,8 @@ export default {
   },
   methods: {
     setSelectedColor(index) {
-      this.$parent.$data.cars.find(car => car.id === this.selectedModel).selectedColor = index
+      //this.$parent.$data.cars.find(car => car.id === this.selectedModel).selectedColor = index
+      this.$emit('keepSelection', 'Color', index)
     }
   }
 }

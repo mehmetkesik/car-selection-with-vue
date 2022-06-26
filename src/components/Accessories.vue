@@ -27,6 +27,7 @@
 export default {
   // eslint-disable-next-line vue/multi-word-component-names
   name: "Accessories",
+  emits: ["keepSelection"],
   props: {
     cars: Array,
     selectedModel: Number
@@ -38,13 +39,14 @@ export default {
   },
   methods: {
     setAccessories(i) {
-      let selectedModel = this.$parent.$data.cars.find(car => car.id === this.selectedModel)
+      this.$emit('keepSelection', 'Accessories', i)
+      /*let selectedModel = this.$parent.$data.cars.find(car => car.id === this.selectedModel)
       let accIndex = selectedModel.selectedAccessories.find(id => id === i)
       if (accIndex) {
         selectedModel.selectedAccessories = selectedModel.selectedAccessories.filter(id => id !== i)
       } else {
         selectedModel.selectedAccessories.push(i)
-      }
+      }*/
     },
     isSelectedAcc(acc) {
       return !!this.$parent.$data.cars.find(car => car.id === this.selectedModel)
