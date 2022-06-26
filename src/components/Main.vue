@@ -46,6 +46,22 @@
       <component :is="selectedComponent" :cars="cars" :selectedModel="selectedModel"></component>
       <!--</Transition>-->
 
+      <br/><br/>
+
+      <div class="downslide">
+        <img alt="selected car image" :src="require('../assets/cars/'+
+        getSelectedCar.model+'/'+
+        getSelectedCar.colors[getSelectedCar.selectedColor]+'.png')"
+             style="height: 100%;"/>
+        <div class="vertical-line"></div>
+        <div class="d-flex flex-column" style="width: 200px;">
+          <p class="downslide-text downslide-text-bold" style="display: inline-block">fads</p>
+          <p class="downslide-text" style="display: inline-block">fads</p>
+        </div>
+        <button class="downslide-button">Colors</button>
+      </div>
+      <br/><br/><br/><br/><br/>
+
     </div>
   </div>
 </template>
@@ -157,7 +173,12 @@ export default {
           selectedColor: 0,
           selectedAccessories: [2, 4],
         }
-      ]
+      ],
+    }
+  },
+  computed: {
+    getSelectedCar() {
+      return this.cars.find(c => c.id === this.selectedModel)
     }
   }
 }
@@ -202,6 +223,47 @@ export default {
 
 .bottom-button-selected {
   visibility: visible;
+}
+
+.downslide {
+  display: flex;
+  flex-direction: row;
+  width: 470px;
+  height: 50px;
+  background: #FFFFFF;
+  box-shadow: 0 2px 70px rgba(0, 0, 0, 0.0703671);
+  border-radius: 11px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+.downslide-button {
+  background: #181818;
+  border-radius: 0 11px 11px 0;
+  height: 100%;
+  width: 120px;
+  color: white;
+  margin-left: auto;
+  border: none;
+}
+
+.vertical-line {
+  width: 1px;
+  height: 30px;
+  margin-top: 10px;
+  border-right: 1px solid rgba(151, 151, 151, 0.2);
+}
+
+.downslide-text {
+  font-style: normal;
+  font-size: 12px;
+  line-height: 15px;
+  letter-spacing: 1.7094px;
+  color: #1C1C1C;
+}
+
+.downslide-text-bold {
+  font-weight: 800;
 }
 
 </style>
